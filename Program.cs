@@ -23,10 +23,16 @@ if (app.Environment.IsDevelopment())
         });
     }
 
-app.UseHttpsRedirection();
+ //app.UseHttpsRedirection();//
 
 app.MapControllers();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PetCareAI.Data.AppDbContext>();
+    db.Database.Migrate();
+}
 
+no Program.cs antes do app.Run() 
 // Adicione esta linha no final para o servidor não fechar sozinho
 app.Run(); 
 
