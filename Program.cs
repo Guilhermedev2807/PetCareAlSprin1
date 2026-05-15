@@ -15,13 +15,12 @@ builder.Services.AddDbContext<PetCareAI.Data.AppDbContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-    {
-        app.MapOpenApi();
-        app.UseSwaggerUI(options => {
-            options.SwaggerEndpoint("/openapi/v1.json", "PetCare AI+ v1");
-        });
-    }
+
+app.MapOpenApi();
+app.UseSwaggerUI(options => {
+    options.SwaggerEndpoint("/openapi/v1.json", "PetCare AI+ v1");
+});
+    
 
  //app.UseHttpsRedirection();//
 
@@ -32,7 +31,6 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-no Program.cs antes do app.Run() 
 // Adicione esta linha no final para o servidor não fechar sozinho
 app.Run(); 
 
